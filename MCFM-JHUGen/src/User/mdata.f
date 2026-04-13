@@ -29,8 +29,8 @@ c     Begin anomalous couplings
       include 'spinzerohiggs_anomcoupl.f'
       include 'AnomZffCouplings.f'
 
-      data AllowAnomalousCouplings / 0 / ! Disables anomalous couplings
-      data AllowAnomalousZffCouplings / 0 / ! Disables anomalous Zff Couplings
+      data AllowAnomalousCouplings / 1 / ! Disables anomalous couplings
+      data AllowAnomalousZffCouplings / 1 / ! Disables anomalous Zff Couplings
       data distinguish_HWWcouplings / 0 /
       data AnomalCouplPR,AnomalCouplDK / 1, 1/
       data channeltoggle_stu / 2 /
@@ -45,18 +45,18 @@ c     4th generation quark masses
 
 c     MARKUS: anomalous couplings for the first resonance
 c     Hgg and Hff anomalous couplings
-      data kappa_top / (0d0,0d0) / ! SM=1,0
-      data kappa_tilde_top / (0d0,0d0) / ! SM=0,0
-      data kappa_bot / (0d0,0d0) / ! SM=1,0
-      data kappa_tilde_bot / (0d0,0d0) / ! SM=0,0
+      data kappa_top / (1d0,0d0) / ! SM=1,0
+      data kappa_tilde_top / (0d0,0d0) / ! SM=1,0
+      data kappa_bot / (1d0,0d0) / ! SM=1,0
+      data kappa_tilde_bot / (0d0,0d0) / ! SM=1,0
       data ghg2 / (0d0,0d0) / ! SM=0,0
       data ghg3 / (0d0,0d0) / ! SM=0,0
       data ghg4 / (0d0,0d0) / ! SM=0,0
 
-      data kappa_4gen_top / (0d0,0d0) /
-      data kappa_tilde_4gen_top / (0d0,0d0) /
-      data kappa_4gen_bot / (0d0,0d0) /
-      data kappa_tilde_4gen_bot / (0d0,0d0) /
+      data kappa_4gen_top / (0d0,0d0) / 
+      data kappa_tilde_4gen_top / (0d0,0d0) / 
+      data kappa_4gen_bot / (0d0,0d0) / 
+      data kappa_tilde_4gen_bot / (0d0,0d0) / 
       data ghg2_4gen / (0d0,0d0) /
       data ghg3_4gen / (0d0,0d0) /
       data ghg4_4gen / (0d0,0d0) /
@@ -392,7 +392,12 @@ c     left handed Z couplings to neutrinos
 c     right handed Z couplings to neutrinos
       data rnZ / 0d0 / ! SM = 0 
 
-c     Anomalous Couplings for the Z to up type quarks in production 
+c     Anomalous Couplings for the Z to the top quark in production
+c     Note, these are called as shifts to SM values
+      data clanot / 0d0 / ! SM unshifted = 0.82039507607344309
+      data cranot / 0.36558111377463703d0 / ! SM unshifted = -0.36558111377463703
+
+c     Anomalous Couplings for the Z to up type quarks (EXCEPT TOP) in production
 c     Note, these are called as shifts to SM values
       data clanou / 0d0 / ! SM = 0
       data cranou / 0d0 / ! SM = 0
