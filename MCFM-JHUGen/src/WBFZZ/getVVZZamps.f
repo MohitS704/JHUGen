@@ -8,6 +8,7 @@
       include 'zprods_decl.f'
       include 'anom_higgs.f'
       include 'WWbits.f'
+      include 'spinzerohiggs_anomcoupl.f'
       integer nmax
       parameter(nmax=10)
       integer k,l,
@@ -103,14 +104,32 @@ c--- propagators and currents are not used in calculation of Higgs contribution
      & +zab(j6,:,j6)+zab(j7,:,j7))
 
 C-----Singly resonant production in VBF style diagrams
-      call ZZSingleres(j1,j2,j3,j4,j5,j6,j7,j8,za,zb,
+      if (alpha_SMEW .ne. 0) then
+            call ZZSingleres(j1,j2,j3,j4,j5,j6,j7,j8,za,zb,
      & ZZ7341,WWp7341,WWm7341)
-      call ZZSingleres(j1,j2,j5,j6,j3,j4,j7,j8,za,zb,
+            call ZZSingleres(j1,j2,j5,j6,j3,j4,j7,j8,za,zb,
      & ZZ7561,WWp7561,WWm7561)
-      call ZZSingleres(j1,j2,j3,j4,j5,j6,j8,j7,za,zb,
+            call ZZSingleres(j1,j2,j3,j4,j5,j6,j8,j7,za,zb,
      & ZZ8341,WWp8341,WWm8341)
-      call ZZSingleres(j1,j2,j5,j6,j3,j4,j8,j7,za,zb,
+            call ZZSingleres(j1,j2,j5,j6,j3,j4,j8,j7,za,zb,
      & ZZ8561,WWp8561,WWm8561)
+      else
+            ZZ7341(:,:,:,:,:,:) = czip
+            WWp7341(:) = czip
+            WWm7341(:) = czip
+
+            ZZ7561(:,:,:,:,:,:) = czip
+            WWp7561(:) = czip
+            WWm7561(:) = czip
+
+            ZZ8341(:,:,:,:,:,:) = czip
+            WWp8341(:) = czip
+            WWm8341(:) = czip
+
+            ZZ8561(:,:,:,:,:,:) = czip
+            WWp8561(:) = czip
+            WWm8561(:) = czip
+      endif
       endif
 
 
