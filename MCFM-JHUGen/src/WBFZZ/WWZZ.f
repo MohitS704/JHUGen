@@ -458,27 +458,27 @@ C----Background contribution
       srWW(1,h56)=2d0/(cxw*propw17*propw28)*(
      & +srgmWW56(1,h56)
      & *srL_anom(i1,i2,i3,i4,i5,i6,i7,i8,za,zb,
-     & dP_A*(alpha_SMEW + 1) - 1,
-     & dM_A*(alpha_SMEW + 1) - 1,
-     & dV_A*(alpha_SMEW + 1) - 1,dFour_A)
+     & dP_A-1+alpha_SMEW,
+     & dM_A-1+alpha_SMEW,
+     & dV_A-1+alpha_SMEW,dFour_A)
      & +srZWW56(1,h56)
      & *srL_anom(i1,i2,i3,i4,i5,i6,i7,i8,za,zb,
-     & dP_Z*(alpha_SMEW + 1) - 1,
-     & dM_Z*(alpha_SMEW + 1) - 1,
-     & dV_Z*(alpha_SMEW + 1) - 1,dFour_Z)
+     & dP_Z-1+alpha_SMEW,
+     & dM_Z-1+alpha_SMEW,
+     & dV_Z-1+alpha_SMEW,dFour_Z)
      & )*BBit
 
       srWW(2,h56)=2d0/(cxw*propw17*propw28)*(
      & +srgmWW56(2,h56)
      & *srR_anom(i1,i2,i3,i4,i5,i6,i7,i8,za,zb,
-     & dP_A*(alpha_SMEW + 1) - 1,
-     & dM_A*(alpha_SMEW + 1) - 1,
-     & dV_A*(alpha_SMEW + 1) - 1,dFour_A)
+     & dP_A-1+alpha_SMEW,
+     & dM_A-1+alpha_SMEW,
+     & dV_A-1+alpha_SMEW,dFour_A)
      & +srZWW56(2,h56)
      & *srR_anom(i1,i2,i3,i4,i5,i6,i7,i8,za,zb,
-     & dP_Z*(alpha_SMEW + 1) - 1,
-     & dM_Z*(alpha_SMEW + 1) - 1,
-     & dV_Z*(alpha_SMEW + 1) - 1,dFour_Z)
+     & dP_Z-1+alpha_SMEW,
+     & dM_Z-1+alpha_SMEW,
+     & dV_Z-1+alpha_SMEW,dFour_Z)
      & )*BBit
 
 
@@ -499,27 +499,27 @@ C----Background contribution
       srWW(h34,1)=srWW(h34,1)+2d0/(cxw*propw17*propw28)*(
      & +srgmWW34(1,h34)
      & *srL_anom(i1,i2,i5,i6,i3,i4,i7,i8,za,zb,
-     & dP_A*(alpha_SMEW + 1) - 1,
-     & dM_A*(alpha_SMEW + 1) - 1,
-     & dV_A*(alpha_SMEW + 1) - 1,dFour_A)
+     & dP_A-1+alpha_SMEW,
+     & dM_A-1+alpha_SMEW,
+     & dV_A-1+alpha_SMEW,dFour_A)
      & +srZWW34(1,h34)
      & *srL_anom(i1,i2,i5,i6,i3,i4,i7,i8,za,zb,
-     & dP_Z*(alpha_SMEW + 1) - 1,
-     & dM_Z*(alpha_SMEW + 1) - 1,
-     & dV_Z*(alpha_SMEW + 1) - 1,dFour_Z)
+     & dP_Z-1+alpha_SMEW,
+     & dM_Z-1+alpha_SMEW,
+     & dV_Z-1+alpha_SMEW,dFour_Z)
      & )*BBit
 
       srWW(h34,2)=srWW(h34,2)+2d0/(cxw*propw17*propw28)*(
      & +srgmWW34(2,h34)
      & *srR_anom(i1,i2,i5,i6,i3,i4,i7,i8,za,zb,
-     & dP_A*(alpha_SMEW + 1) - 1,
-     & dM_A*(alpha_SMEW + 1) - 1,
-     & dV_A*(alpha_SMEW + 1) - 1,dFour_A)
+     & dP_A-1+alpha_SMEW,
+     & dM_A-1+alpha_SMEW,
+     & dV_A-1+alpha_SMEW,dFour_A)
      & +srZWW34(2,h34)
      & *srR_anom(i1,i2,i5,i6,i3,i4,i7,i8,za,zb,
-     & dP_Z*(alpha_SMEW + 1) - 1,
-     & dM_Z*(alpha_SMEW + 1) - 1,
-     & dV_Z*(alpha_SMEW + 1) - 1,dFour_Z)
+     & dP_Z-1+alpha_SMEW,
+     & dM_Z-1+alpha_SMEW,
+     & dV_Z-1+alpha_SMEW,dFour_Z)
      & )*BBit
 
       enddo
