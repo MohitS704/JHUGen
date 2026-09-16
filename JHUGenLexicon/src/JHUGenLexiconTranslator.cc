@@ -93,6 +93,9 @@ void JHUGenLexiconTranslator::translate(){
         voutput.at(coupl_ampjhutrip_dP_A).first = 1.0;
         voutput.at(coupl_ampjhutrip_dM_A).first = 1.0;
         voutput.at(coupl_ampjhutrip_dAAWpWm).first = 1.0;
+        voutput.at(coupl_ampjhutrip_ghw1).first += delta_m;
+      } else{
+        voutput.at(coupl_ampjhu_ghw1).first += delta_m;
       }
     }
     if (basis_output == bEFT_JHUGen){
@@ -280,7 +283,7 @@ void JHUGenLexiconTranslator::translate(){
 	}
       }
       if (basis_output ==bEFT_HiggsBasis){
-	if(include_triple_quartic_gauge){
+        if(include_triple_quartic_gauge){
           voutput.at(coupl_efthbasistrip_dCz).first +=(vev_lam)* -3.0*delta_v;
           voutput.at(coupl_efthbasistrip_Czbx).first +=(vev_lam)* 4.0*(sw)/(2.0*pow(e,2))*delta_v;
           voutput.at(coupl_efthbasistrip_dKz).first +=(vev_lam)* 4.0/(16.0*sw-8.0) * delta_v;
