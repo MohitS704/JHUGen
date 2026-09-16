@@ -9,6 +9,7 @@
       include 'zprods_decl.f'
       include 'zacouplejk.f'
       include 'spinzerohiggs_anomcoupl.f'
+      include 'ewcouple.f'
       integer h12,h34,i1,i2,i3,i4,n1,n2,n3,n4,jdu
       double precision s12,s34,s123,s124,s134,s234,s1234,bit,
      & xl,xr,xq
@@ -17,6 +18,7 @@
      & after(4,2,2),before(4,2,2),jw(4,2,2),zab2,rxw,
      & j1l(4,2,2,2),WWZ(2,2,2),WWgm(2,2,2) !,WWgmZ(2,2,2)
       double complex coeff_WWZ_cW, coeff_WWA_cW
+      double complex prefactor_cW_triple
 C      after(mu,h17,h34),before(mu,h17,h34),jw(mu,jdu,h34)
 C---The one Z-current multiplied by i
 C---order of indices Lorentz,jdu up or down,
@@ -52,11 +54,13 @@ c      bit=0d0
 c      else
       bit=1d0
 c      endif
-      coeff_WWZ_cW = -6d0*dcmplx(0d0,1d0)*sqrt(cxw) ! -6icos(theta_w) Needs to fixed for cPhiW and cPhiB effects. 
-      coeff_WWA_cW = -6d0*dcmplx(0d0,1d0)*sqrt(cone-cxw) !  -6isin(theta_w)
 C---setting up couplings dependent on whether we are doing 34-line or 56-line
-      coeff_WWZ_cW = -6d0*dcmplx(0d0,1d0)*sqrt(cxw) ! -6icos(theta_w) Needs to fixed for cPhiW and cPhiB effects. 
-      coeff_WWA_cW = -6d0*dcmplx(0d0,1d0)*sqrt(cone-cxw) !  -6isin(theta_w)
+      prefactor_cW_triple =
+     & -dcmplx(0d0,1d0)/(2d0*sqrt(esq))
+
+      coeff_WWA_cW =
+     & -6d0*dcmplx(0d0,1d0)*sqrt(cxw)
+      coeff_WWZ_cW = coeff_WWA_cW
       if ((n3+n4 == 7) .or. (n3+n4 == 9)) then
       xl=l1
       xr=r1
@@ -178,9 +182,12 @@ C---indices before(mu,h12,h34),after(mu,h12,h34)
 !    MARKUS: this is the new VWW vertex with anomalous couplings dV,dP,dM,dFour
 !    MOHIT: Added alpha_SMEW to allow for SM background amplitude to go to 0
 !    MOHIT: when alpha_SMEW=0 and no BSM, amplitude should be 0!
+
+C---N.Pinto: Replaced the three lines below temporarily to only include t-channel w exchange diagrams. 
       jw(:,jdu,h34) =
      &     alpha_SMEW*gmZ(jdu,1,h34)*before(:,1,h34)
      &    +alpha_SMEW*gmZ(3-jdu,1,h34)*after(:,1,h34)
+      ! jw(:,jdu,h34)=czip
 C----Gamma attachment to exchanged W
      & +(WWgm(jdu,1,h34))/propw12*0.5d0*
      & (-(((dM_A + dP_A - 2)*za(i1,i3)*zab(i2,:,i1)
@@ -218,13 +225,16 @@ C----SM portion to deal with alpha_SMEW
      & - (zab(i3,:,i3) + zab(i4,:,i4))*zb(i1,i4)
      & - (2)*zab(i2,:,i1)*zb(i2,i4)))
 C----N.Pinto: WWZ vertex contribution from cW in warsaw basis: -1d0 is an ad-hoc correction to match momentum convention. 
-     & + -1d0*coeff_WWZ_cW*(1/LambdaBSM**2)*cW*(WWZ(jdu,1,h34))/propw12
+
+     & + -1d0*prefactor_cW_triple
+     & *coeff_WWZ_cW*(1/LambdaBSM**2)
+     & *cW*(WWZ(jdu,1,h34))/propw12
      & *(
      & -zab2(i2,i3,i4,i1)*zab2(i3,i1,i2,i4)
      & *0.5d0*(zab(i3,:,i3)+zab(i4,:,i4))
      & +zab2(i2,i3,i4,i1)*zab2(i3,i1,i2,i4)
      & *0.5d0*(zab(i1,:,i1)+zab(i2,:,i2))
-     & +2*za(i2,i3)*zb(i4,i1)*(0.5d0*(zab(i1,:,i1)+zab(i2,:,i2))
+     & +2d0*za(i2,i3)*zb(i4,i1)*(0.5d0*(zab(i1,:,i1)+zab(i2,:,i2))
      & *(-0.5d0*(s1234 - s(i1,i2)+s(i3,i4))) !eta_mu1mu2 line starts here
      & - 0.5d0*(zab(i3,:,i3)+zab(i4,:,i4))
      & *(-0.5d0*(s1234 + (s(i1,i2) - s(i3,i4))))) 
@@ -237,13 +247,15 @@ C----N.Pinto: WWZ vertex contribution from cW in warsaw basis: -1d0 is an ad-hoc
      & -zab2(i3,i1,i2,i4)*(-0.5d0*(s1234 - s(i1,i2) + s(i3,i4))))
      & )
 C----N.Pinto: WWgam vertex contribution from cW in warsaw basis: 
-     & + -1d0*coeff_WWA_cW*(1/LambdaBSM**2)*cW*(WWgm(jdu,1,h34))/propw12
+     & + -1d0*prefactor_cW_triple
+     & *coeff_WWA_cW*(1/LambdaBSM**2)
+     & *cW*(WWgm(jdu,1,h34))/propw12
      & *(
      & -zab2(i2,i3,i4,i1)*zab2(i3,i1,i2,i4)
      & *0.5d0*(zab(i3,:,i3)+zab(i4,:,i4))
      & +zab2(i2,i3,i4,i1)*zab2(i3,i1,i2,i4)
      & *0.5d0*(zab(i1,:,i1)+zab(i2,:,i2))
-     & +2*za(i2,i3)*zb(i4,i1)*(0.5d0*(zab(i1,:,i1)+zab(i2,:,i2))
+     & +2d0*za(i2,i3)*zb(i4,i1)*(0.5d0*(zab(i1,:,i1)+zab(i2,:,i2))
      & *(-0.5d0*(s1234 - s(i1,i2)+s(i3,i4))) !eta_mu1mu2 line starts here
      & - 0.5d0*(zab(i3,:,i3)+zab(i4,:,i4))
      & *(-0.5d0*(s1234 + (s(i1,i2) - s(i3,i4))))) 
