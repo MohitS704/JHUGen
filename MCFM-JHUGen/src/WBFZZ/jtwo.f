@@ -9,17 +9,10 @@
       integer n1,n2,n3,n4,n5,n6,jdu,h21,h34,h56
 C---The two Z-current divided by (-i)
 
-      if (alpha_SMEW .ne. 0) then
-            call jtwo3456(n2,n3,n4,n5,n6,n1,
+      call jtwo3456(n2,n3,n4,n5,n6,n1,
      & za,zb,zab,zba,j2_34_56_1,jw2_34_56_1)
-            call jtwo3456(n2,n5,n6,n3,n4,n1,
+      call jtwo3456(n2,n5,n6,n3,n4,n1,
      & za,zb,zab,zba,j2_56_34_1,jw2_56_34_1)
-      else
-            jw2_34_56_1(:,:,:,:) = czip
-            j2_34_56_1(:,:,:,:,:) = czip
-            jw2_56_34_1(:,:,:,:) = czip
-            j2_56_34_1(:,:,:,:,:) = czip
-      endif
 
 
       do jdu=1,2
@@ -27,11 +20,11 @@ C---The two Z-current divided by (-i)
       do h34=1,2
       jw2(1:4,jdu,h34,h56)=
      &  jw2_34_56_1(1:4,jdu,h34,h56)
-     & +jw2_56_34_1(1:4,jdu,h56,h34)
+     & +alpha_SMEW*jw2_56_34_1(1:4,jdu,h56,h34)
       do h21=1,2
       j2(1:4,jdu,h21,h34,h56)=
      &  j2_34_56_1(1:4,jdu,h21,h34,h56)
-     & +j2_56_34_1(1:4,jdu,h21,h56,h34)
+     & +alpha_SMEW*j2_56_34_1(1:4,jdu,h21,h56,h34)
       enddo
       enddo
       enddo

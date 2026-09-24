@@ -74,11 +74,18 @@ c--- propagators and currents are not used in calculation of Higgs contribution
      & ll7341,ll7561,ll7342,ll7562,
      & gmZl7341,gmZl7561,gmZl7342,gmZl7562,
      & gmZl8562,gmZl8342,gmZl8561,gmZl8341)
-
-      call jzero(j7,j1,zab,zba,j7_1)
-      call jzero(j7,j2,zab,zba,j7_2)
-      call jzero(j8,j1,zab,zba,j8_1)
-      call jzero(j8,j2,zab,zba,j8_2)
+      
+      if (alpha_SMEW .ne. 0) then
+            call jzero(j7,j1,zab,zba,j7_1)
+            call jzero(j7,j2,zab,zba,j7_2)
+            call jzero(j8,j1,zab,zba,j8_1)
+            call jzero(j8,j2,zab,zba,j8_2)
+      else
+            j7_1(:,:) = czip
+            j7_2(:,:) = czip
+            j8_1(:,:) = czip
+            j8_2(:,:) = czip
+      endif
 
       call jone(j7,j3,j4,j1,za,zb,zab,zba,j7_34_1,jw7_34_1,jl7_34_1)
       call jone(j7,j3,j4,j2,za,zb,zab,zba,j7_34_2,jw7_34_2,jl7_34_2)
@@ -89,10 +96,18 @@ c--- propagators and currents are not used in calculation of Higgs contribution
       call jone(j8,j5,j6,j1,za,zb,zab,zba,j8_56_1,jw8_56_1,jl8_56_1)
       call jone(j8,j5,j6,j2,za,zb,zab,zba,j8_56_2,jw8_56_2,jl8_56_2)
 
+      if (alpha_SMEW .ne. 0) then
       call jtwo(j7,j3,j4,j5,j6,j1,za,zb,zab,zba,j7_3456_1,jw7_3456_1)
       call jtwo(j7,j3,j4,j5,j6,j2,za,zb,zab,zba,j7_3456_2,jw7_3456_2)
       call jtwo(j8,j3,j4,j5,j6,j1,za,zb,zab,zba,j8_3456_1,jw8_3456_1)
       call jtwo(j8,j3,j4,j5,j6,j2,za,zb,zab,zba,j8_3456_2,jw8_3456_2)
+      else
+            jw7_3456_1(:,:,:,:) = czip
+            jw7_3456_2(:,:,:,:) = czip
+            jw8_3456_1(:,:,:,:) = czip
+            jw8_3456_2(:,:,:,:) = czip
+      endif
+      
 
       k7341(:)=0.5d0*(zab(j1,:,j1)+zab(j3,:,j3)
      & +zab(j4,:,j4)+zab(j7,:,j7))
@@ -135,12 +150,20 @@ C-----Singly resonant production in VBF style diagrams
 
 
 C----ZZ->ZZ scattering with the exchange of a H
+C----This is the slowest part of the code
       ! print *,"ZZH",EW_ZZH_prod_flag
-      if (EW_ZZH_prod_flag .eqv. .true.) then
+      if (
+     & (Hbit.eq.0d0)
+     & .and.
+     & (EW_ZZH_prod_flag .eqv. .true.)
+     & ) then
             call ZZHZZamp(j1,j2,j3,j4,j5,j6,j7,j8,
      & za,zb,ZZHamp71_82)
             call ZZHZZamp(j1,j2,j3,j4,j5,j6,j8,j7,
      & za,zb,ZZHamp81_72)
+      else
+            ZZHamp71_82(:,:,:,:,:,:) = czip
+            ZZHamp81_72(:,:,:,:,:,:) = czip
       endif
 C----Four boson vertex + WW->Higgs diagram
       call WWZZ(j1,j2,j3,j4,j5,j6,j7,j8,

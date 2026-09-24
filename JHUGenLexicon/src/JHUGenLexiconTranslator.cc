@@ -57,20 +57,20 @@ void JHUGenLexiconTranslator::translate(){
     }
   }
   // Fix output by subracting by constant vectors
-
-  if (
-    ((basis_input == bAmplitude_JHUGen) || (basis_input == bEFT_JHUGen))
-    &&
-    (useMCFMAtInput)
-    &&
-    (include_triple_quartic_gauge)
-  ){
-    voutput.at(coupl_ampjhutrip_dV_Z).first /= 2;
-    voutput.at(coupl_ampjhutrip_dV_A).first /= 2;
-    voutput.at(coupl_ampjhutrip_dP_Z).first /= 2;
-    voutput.at(coupl_ampjhutrip_dM_Z).first /= 2;
-    voutput.at(coupl_ampjhutrip_dZZWpWm).first /= 2;
-    voutput.at(coupl_ampjhutrip_dZAWpWm).first /= 2;
+  if (useMCFMAtInput){
+    delta_m *= 2;
+    if (
+      ((basis_input == bAmplitude_JHUGen) || (basis_input == bEFT_JHUGen))
+      &&
+      (include_triple_quartic_gauge)
+    ){
+      voutput.at(coupl_ampjhutrip_dV_Z).first /= 2;
+      voutput.at(coupl_ampjhutrip_dV_A).first /= 2;
+      voutput.at(coupl_ampjhutrip_dP_Z).first /= 2;
+      voutput.at(coupl_ampjhutrip_dM_Z).first /= 2;
+      voutput.at(coupl_ampjhutrip_dZZWpWm).first /= 2;
+      voutput.at(coupl_ampjhutrip_dZAWpWm).first /= 2;
+    }
   }
   // Offsets for input Amplitude JHUGen
   if (basis_input == bAmplitude_JHUGen){
