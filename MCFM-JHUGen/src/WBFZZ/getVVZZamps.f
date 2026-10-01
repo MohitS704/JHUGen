@@ -151,9 +151,8 @@ C-----Singly resonant production in VBF style diagrams
 
 C----ZZ->ZZ scattering with the exchange of a H
 C----This is the slowest part of the code
-      ! print *,"ZZH",EW_ZZH_prod_flag
       if (
-     & (Hbit.eq.0d0)
+     & (Hbit.eq.cone)
      & .and.
      & (EW_ZZH_prod_flag .eqv. .true.)
      & ) then
