@@ -1,0 +1,42 @@
+ccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
+c      written by the UFO converter
+ccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
+
+      DOUBLE PRECISION G
+      COMMON/STRONG/ G
+
+      DOUBLE COMPLEX GAL(2)
+      COMMON/WEAK/ GAL
+
+      DOUBLE PRECISION MU_R
+      COMMON/RSCALE/ MU_R
+
+      DOUBLE PRECISION NF
+      PARAMETER(NF=5)
+
+      DOUBLE PRECISION MDL_MZ1,MDL_MW,MDL_MT,MDL_MT1,MDL_MH1,MDL_MW1
+     $ ,MDL_MZ,MDL_MH
+
+      COMMON/MASSES/ MDL_MZ1,MDL_MW,MDL_MT,MDL_MT1,MDL_MH1,MDL_MW1
+     $ ,MDL_MZ,MDL_MH
+
+
+      DOUBLE PRECISION MDL_WZ1,MDL_WH,MDL_WT,MDL_WW1,MDL_WZ,MDL_WT1
+     $ ,MDL_WW,MDL_WH1
+
+      COMMON/WIDTHS/ MDL_WZ1,MDL_WH,MDL_WT,MDL_WW1,MDL_WZ,MDL_WT1
+     $ ,MDL_WW,MDL_WH1
+
+
+      DOUBLE COMPLEX GC_1, GC_2, GC_3, GC_5, GC_139, GC_140, GC_177,
+     $  GC_202, GC_203, GC_205, GC_206, GC_242, GC_244, GC_263, GC_264
+     $ , GC_265, GC_284, GC_285, GC_468, GC_470, GC_471, GC_486,
+     $  GC_497, GC_528, GC_532, GC_533, GC_534, GC_537, GC_564, GC_565
+     $ , GC_127, GC_128, GC_282, GC_283
+
+      COMMON/COUPLINGS/ GC_1, GC_2, GC_3, GC_5, GC_139, GC_140, GC_177
+     $ , GC_202, GC_203, GC_205, GC_206, GC_242, GC_244, GC_263,
+     $  GC_264, GC_265, GC_284, GC_285, GC_468, GC_470, GC_471, GC_486
+     $ , GC_497, GC_528, GC_532, GC_533, GC_534, GC_537, GC_564,
+     $  GC_565, GC_127, GC_128, GC_282, GC_283
+
