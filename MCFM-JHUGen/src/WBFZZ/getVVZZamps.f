@@ -9,6 +9,7 @@
       include 'anom_higgs.f'
       include 'WWbits.f'
       include 'spinzerohiggs_anomcoupl.f'
+      include 'ZZpolarization.f'
       integer nmax
       parameter(nmax=10)
       integer k,l,
@@ -124,7 +125,8 @@ c--- propagators and currents are not used in calculation of Higgs contribution
      & +zab(j6,:,j6)+zab(j7,:,j7))
 
 C-----Singly resonant production in VBF style diagrams
-      if (alpha_SMEW .ne. 0) then
+C-----(dropped while polarized amplitudes are computed, ZZpol_resonly)
+      if ((alpha_SMEW .ne. 0) .and. (.not. ZZpol_resonly)) then
             call ZZSingleres(j1,j2,j3,j4,j5,j6,j7,j8,za,zb,
      & ZZ7341,WWp7341,WWm7341)
             call ZZSingleres(j1,j2,j5,j6,j3,j4,j7,j8,za,zb,
@@ -178,6 +180,14 @@ C----Four boson vertex + WW->Higgs diagram
      & za,zb,WWZZ82_71amp,srWWZZ82_71amp)
       call WWZZ(j2,j1,j3,j4,j5,j6,j7,j8,
      & za,zb,WWZZ72_81amp,srWWZZ72_81amp)
+C----singly resonant WW->Z/A->ll(->Z/A ll) pieces: dropped while
+C----polarized amplitudes are computed
+      if (ZZpol_resonly) then
+        srWWZZ71_82amp(:,:)=czip
+        srWWZZ81_72amp(:,:)=czip
+        srWWZZ82_71amp(:,:)=czip
+        srWWZZ72_81amp(:,:)=czip
+      endif
       ! print *,"WW",WWZZ71_82amp,srWWZZ71_82amp
       ! print *,"WW",WWZZ81_72amp,srWWZZ81_72amp
       ! print *,"WW",WWZZ82_71amp,srWWZZ82_71amp

@@ -10,6 +10,7 @@
       include 'zacouplejk.f'
       include 'spinzerohiggs_anomcoupl.f'
       include 'ewcouple.f'
+      include 'ZZpolarization.f'
       integer h12,h34,i1,i2,i3,i4,n1,n2,n3,n4,jdu
       double precision s12,s34,s123,s124,s134,s234,s1234,bit,
      & xl,xr,xq
@@ -273,7 +274,8 @@ C----N.Pinto: WWgam vertex contribution from cW in warsaw basis:
 
 !
 C----non-resonant e-e+ production by exchanged W-line.
-      if (h34 .eq. 1) then
+C----(dropped while polarized amplitudes are computed, ZZpol_resonly)
+      if ((h34 .eq. 1) .and. (.not. ZZpol_resonly)) then
       if (((jdu .eq. 1) .and. (xq .le. 0d0)) .or.
      &    ((jdu .eq. 2) .and. (xq .ge. 0d0))) then
       jw(:,jdu,h34)=jw(:,jdu,h34)
@@ -314,6 +316,11 @@ C----non-resonant e-e+ production by exchanged Z/gamma-line.
 c--- to get opposite helicity, 3<->4 swap needs additional minus sign
       if (h34 .eq. 2) then
         j1l(:,jdu,:,h34)=-j1l(:,jdu,:,h34)
+      endif
+
+C--- non-resonant current dropped for polarized amplitudes
+      if (ZZpol_resonly) then
+        j1l(:,jdu,:,h34)=czip
       endif
 
       enddo

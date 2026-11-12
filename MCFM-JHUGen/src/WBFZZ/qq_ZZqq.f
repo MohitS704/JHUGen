@@ -125,11 +125,13 @@ C--   MARKUS: adding switches to remove VH or VBF contributions
 !      write(6,*) "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
 
 c--   Call the VVZZ amplitudes
-      call getVVZZamps(amp,ampa,ampb,za,zb,zab,zba,
+c--   (getVVZZamps_pol = getVVZZamps unless the Z helicity selection
+c--    in ZZpolarization.f is switched on)
+      call getVVZZamps_pol(p,amp,ampa,ampb,za,zb,zab,zba,
      & j1(j),j2(j),3,4,5,6,j7(j),j8(j),doHO,doBO)
       if (interference) then
-        call getVVZZamps(amp_swap,ampa_swap,ampb_swap,za,zb,zab,zba,
-     &   j1(j),j2(j),3,6,5,4,j7(j),j8(j),doHO,doBO)
+        call getVVZZamps_pol(p,amp_swap,ampa_swap,ampb_swap,
+     &   za,zb,zab,zba,j1(j),j2(j),3,6,5,4,j7(j),j8(j),doHO,doBO)
       endif
       ! print *,"SETUP=",AnomalCouplPR,AnomalCouplDK
       ! print *,amp

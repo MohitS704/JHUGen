@@ -150,6 +150,7 @@ DIRS	=	$(MCFMHOME):\
 WBFFILES = \
 testWBFVVApartComb.o \
 getVVZZamps.o \
+getVVZZamps_pol.o \
 getVVWWamps.o \
 getQQZZQQstrongamps.o \
 getQQWWQQstrongamps.o \

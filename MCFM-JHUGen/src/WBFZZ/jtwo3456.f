@@ -7,6 +7,7 @@
       include 'sprods_com.f'
       include 'zprods_decl.f'
       include 'zacouplejk.f'
+      include 'ZZpolarization.f'
       integer h1,h34,h56,i1,i2,i3,i4,i5,i6,n1,n2,n3,n4,n5,n6,jdu,al,nu
 
       double precision s34,s56,s234,s156,s356,s456,s3456,
@@ -185,6 +186,12 @@ C---setting up couplings dependent on whether we are doing 34-line or 56-line
       j4l(:,2,h56)=
      & +zb(i3,i6)/s356*(za(i5,i3)*zba(i3,:,i4)+za(i5,i6)*zba(i6,:,i4))
      & -za(i5,i4)/s456*(zba(i3,:,i4)*zb(i4,i6)+zba(i3,:,i5)*zb(i5,i6))
+
+C--- (5,6) radiated off the (3,4) lepton line is not resonant in s34:
+C--- dropped while polarized amplitudes are computed
+      if (ZZpol_resonly) then
+        j4l(:,:,h56)=czip
+      endif
 
       do h34=1,2
          if (h34.eq.1) then
